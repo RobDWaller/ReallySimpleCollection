@@ -2,7 +2,7 @@
 
 use ReallySimpleCollection\Collection\Collection;
 
-class CollectionCollectionTest extends PHPUnit_Framework_TestCase 
+class CollectionCollectionTest extends PHPUnit_Framework_TestCase
 {
     public function testCollection()
     {
@@ -10,7 +10,7 @@ class CollectionCollectionTest extends PHPUnit_Framework_TestCase
         
         $collection = new Collection($array);
 
-        $this->assertInstanceOf(Collection::class, $collection);   
+        $this->assertInstanceOf(Collection::class, $collection);
     }
 
     public function testCollectionLoop()
@@ -31,7 +31,7 @@ class CollectionCollectionTest extends PHPUnit_Framework_TestCase
         $collection = new Collection($array);
 
         $result = $collection->filter(
-            function($var) {
+            function($var){
                 return $var['age'] <= 30;
             }
         );
@@ -44,13 +44,13 @@ class CollectionCollectionTest extends PHPUnit_Framework_TestCase
     }
 
     public function testCollectionMap()
-    {   
+    {
         $array = require(__DIR__ . '/UserArray.php');
 
         $collection = new Collection($array);
 
-        $result = $collection->map(function($var) {
-            return $var['forename'] . ' ' . $var['surname']; 
+        $result = $collection->map(function($var){
+            return $var['forename'] . ' ' . $var['surname'];
         });
 
         $this->assertInstanceOf(Collection::class, $result);
@@ -68,7 +68,7 @@ class CollectionCollectionTest extends PHPUnit_Framework_TestCase
 
         $collection = new Collection($array);
 
-        $result = $collection->map(function($var) {
+        $result = $collection->map(function($var){
             $var['fullname'] = $var['forename'] . ' ' . $var['surname'];
             return $var;
         });
@@ -90,7 +90,7 @@ class CollectionCollectionTest extends PHPUnit_Framework_TestCase
 
         $this->assertTrue(isset($collection->current()['email']));
 
-        $result = $collection->map(function($var) {
+        $result = $collection->map(function($var){
             unset($var['email']);
             return $var;
         });
