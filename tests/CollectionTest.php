@@ -31,7 +31,7 @@ class CollectionCollectionTest extends PHPUnit_Framework_TestCase
         $collection = new Collection($array);
 
         $result = $collection->filter(
-            function($var){
+            function ($var) {
                 return $var['age'] <= 30;
             }
         );
@@ -49,7 +49,7 @@ class CollectionCollectionTest extends PHPUnit_Framework_TestCase
 
         $collection = new Collection($array);
 
-        $result = $collection->map(function($var){
+        $result = $collection->map(function ($var) {
             return $var['forename'] . ' ' . $var['surname'];
         });
 
@@ -68,7 +68,7 @@ class CollectionCollectionTest extends PHPUnit_Framework_TestCase
 
         $collection = new Collection($array);
 
-        $result = $collection->map(function($var){
+        $result = $collection->map(function ($var) {
             $var['fullname'] = $var['forename'] . ' ' . $var['surname'];
             return $var;
         });
@@ -90,7 +90,7 @@ class CollectionCollectionTest extends PHPUnit_Framework_TestCase
 
         $this->assertTrue(isset($collection->current()['email']));
 
-        $result = $collection->map(function($var){
+        $result = $collection->map(function ($var) {
             unset($var['email']);
             return $var;
         });
