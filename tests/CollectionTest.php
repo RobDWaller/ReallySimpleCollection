@@ -31,7 +31,7 @@ class CollectionCollectionTest extends PHPUnit_Framework_TestCase
         $collection = new Collection($array);
 
         $result = $collection->filter(
-            function($var){
+            function ($var) {
                 return $var['age'] <= 30;
             }
         );
