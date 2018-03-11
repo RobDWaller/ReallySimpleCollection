@@ -1,11 +1,10 @@
 # Really Simple Collection
 
-A very simple collection library that helps you turn arrays into collections. Provides lots of useful methods such as first, map, filter, etc.
+A very simple PHP collection library that helps you turn arrays into collections. Provides lots of useful methods such as first, map, filter, etc.
 
 ## Usage
 
-To use the collection is very simple, just pass an array into the new instance
-of the collection class.
+To use the collection is very simple, just pass an array into the new instance of the collection class.
 
 ```
 <?php
@@ -62,5 +61,5 @@ $collection->valid();
 ## Author
 
 - Rob Waller
-- [@RobDWaller](https:://twitter.com/RobDWaller)
+- [@RobDWaller](https://twitter.com/RobDWaller)
 - [Website](https://rbrt.wllr.info)
