@@ -2,10 +2,10 @@
 
 return [
     [
-        'forename' => 'John',
-        'surname' => 'Galt',
-        'username' => 'jGalt95',
-        'email' => 'j.galt@gmail.com',
+        'forename' => 'Foo',
+        'surname' => 'Bar',
+        'username' => 'fBar95',
+        'email' => 'f.bar@gmail.com',
         'age' => 22,
         'country' => 'USA',
         'city' => 'New York',
@@ -45,7 +45,7 @@ return [
         'forename' => 'Stephanie',
         'surname' => 'Lehman',
         'username' => 'stephL89',
-        'email' => 'j.galt@gmail.com',
+        'email' => 's.lehman@gmail.com',
         'age' => 28,
         'country' => 'Germany',
         'city' => 'Munich',

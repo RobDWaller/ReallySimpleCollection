@@ -52,6 +52,18 @@ class Collection implements Iterator, Countable
         return new Collection(array_map($callback, $this->collectionArray));
     }
 
+    public function toArray()
+    {
+        return $this->collectionArray;
+    }
+
+    public function first()
+    {
+        $this->rewind();
+
+        return $this->current();
+    }
+
     public static function make(array $collectionArray)
     {
         return new static($collectionArray);

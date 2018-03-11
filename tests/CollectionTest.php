@@ -1,23 +1,29 @@
 <?php
 
-use ReallySimpleCollection\Collection\Collection;
+namespace Tests;
 
-class CollectionTest extends PHPUnit_Framework_TestCase
+use ReallySimpleCollection\Collection\Collection;
+use PHPUnit\Framework\TestCase;
+
+class CollectionTest extends TestCase
 {
+    private $items;
+
+    public function setUp()
+    {
+        $this->items = require(__DIR__ . '/UserArray.php');
+    }
+
     public function testCollection()
     {
-        $array = require(__DIR__ . '/UserArray.php');
-        
-        $collection = new Collection($array);
+        $collection = new Collection($this->items);
 
         $this->assertInstanceOf(Collection::class, $collection);
     }
 
     public function testCollectionLoop()
     {
-        $array = require(__DIR__ . '/UserArray.php');
-        
-        $collection = new Collection($array);
+        $collection = new Collection($this->items);
 
         foreach ($collection as $key => $value) {
             $this->assertTrue(array_key_exists('surname', $value));
@@ -26,9 +32,7 @@ class CollectionTest extends PHPUnit_Framework_TestCase
 
     public function testCollectionFilter()
     {
-        $array = require(__DIR__ . '/UserArray.php');
-
-        $collection = new Collection($array);
+        $collection = new Collection($this->items);
 
         $result = $collection->filter(
             function ($var) {
@@ -45,9 +49,7 @@ class CollectionTest extends PHPUnit_Framework_TestCase
 
     public function testCollectionMap()
     {
-        $array = require(__DIR__ . '/UserArray.php');
-
-        $collection = new Collection($array);
+        $collection = new Collection($this->items);
 
         $result = $collection->map(function ($var) {
             return $var['forename'] . ' ' . $var['surname'];
@@ -57,16 +59,14 @@ class CollectionTest extends PHPUnit_Framework_TestCase
 
         $this->assertEquals(5, $result->count());
 
-        $this->assertEquals('John Galt', $result->current());
+        $this->assertEquals('Foo Bar', $result->current());
 
         $this->assertEquals('Anne Jones', $result->next());
     }
 
     public function testCollectionAddItem()
     {
-        $array = require(__DIR__ . '/UserArray.php');
-
-        $collection = new Collection($array);
+        $collection = new Collection($this->items);
 
         $result = $collection->map(function ($var) {
             $var['fullname'] = $var['forename'] . ' ' . $var['surname'];
@@ -77,16 +77,14 @@ class CollectionTest extends PHPUnit_Framework_TestCase
 
         $this->assertEquals(5, $result->count());
 
-        $this->assertEquals('John Galt', $result->current()['fullname']);
+        $this->assertEquals('Foo Bar', $result->current()['fullname']);
 
-        $this->assertEquals('John', $result->current()['forename']);
+        $this->assertEquals('Foo', $result->current()['forename']);
     }
 
     public function testCollectionRemoveKey()
     {
-        $array = require(__DIR__ . '/UserArray.php');
-
-        $collection = new Collection($array);
+        $collection = new Collection($this->items);
 
         $this->assertTrue(isset($collection->current()['email']));
 
@@ -104,14 +102,25 @@ class CollectionTest extends PHPUnit_Framework_TestCase
         $this->assertFalse(isset($result->next()['email']));
     }
 
+    public function testCollectionFirst()
+    {
+        $collection = new Collection($this->items);
+
+        $this->assertEquals('Foo', $collection->first()['forename']);
+
+        $collection->next();
+        $collection->next();
+
+        $this->assertEquals('Craig', $collection->current()['forename']);
+        $this->assertEquals('Bar', $collection->first()['surname']);
+    }
+
     public function testCollectionStaticMake()
     {
-        $array = require(__DIR__ . '/UserArray.php');
-
-        $collection = Collection::make($array);
+        $collection = Collection::make($this->items);
 
         $this->assertInstanceOf(Collection::class, $collection);
 
-        $this->assertEquals('John', $collection->current()['forename']);
+        $this->assertEquals('Foo', $collection->current()['forename']);
     }
 }
