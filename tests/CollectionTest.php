@@ -2,7 +2,7 @@
 
 namespace Tests;
 
-use ReallySimpleCollection\Collection\Collection;
+use ReallySimple\Collection;
 use PHPUnit\Framework\TestCase;
 
 class CollectionTest extends TestCase

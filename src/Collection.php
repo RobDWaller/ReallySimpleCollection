@@ -1,4 +1,6 @@
-<?php namespace ReallySimpleCollection\Collection;
+<?php
+
+namespace ReallySimple;
 
 use Iterator;
 use Countable;

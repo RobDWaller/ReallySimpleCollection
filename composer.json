@@ -19,7 +19,7 @@
     },
     "autoload": {
         "psr-4": {
-            "ReallySimpleCollection\\": "src",
+            "ReallySimple\\": "src",
             "Tests\\": "tests"
         }
     }
