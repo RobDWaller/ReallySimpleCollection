@@ -25,7 +25,7 @@ class CollectionTest extends TestCase
     {
         $collection = new Collection($this->items);
 
-        foreach ($collection as $key => $value) {
+        foreach ($collection as $value) {
             $this->assertTrue(array_key_exists('surname', $value));
         }
     }
