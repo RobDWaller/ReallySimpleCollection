@@ -11,6 +11,7 @@ before_script:
 
 script:
     - vendor/bin/phpstan analyse --level 7 src tests
+    - vendor/bin/phpmd src text ruleset.xml
     - vendor/bin/phpunit --coverage-clover=coverage.xml
 
 after_success:
