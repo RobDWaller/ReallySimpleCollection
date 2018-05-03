@@ -83,7 +83,7 @@ class MapReduce
      * collection.
      *
      * @param callable $callback
-     * @param $initial
+     * @param mixed $initial
      * @return Collection
      */
      public function reduce(callable $callback, $initial = null): Collection
