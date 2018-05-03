@@ -86,8 +86,8 @@ class MapReduce
      * @param mixed $initial
      * @return Collection
      */
-     public function reduce(callable $callback, $initial = null): Collection
-     {
-         return new Collection(array_reduce($this->items, $callback, $initial));
-     }
+    public function reduce(callable $callback, $initial = null): Collection
+    {
+        return new Collection(array_reduce($this->items, $callback, $initial));
+    }
 }
