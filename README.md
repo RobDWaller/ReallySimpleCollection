@@ -6,8 +6,7 @@ A very simple PHP collection library that helps you turn arrays into collections
 
 To use the collection is very simple, just pass an array into the new instance of the collection class.
 
-```
-<?php
+```php
 
 use ReallySimple\Collection;
 
@@ -20,8 +19,7 @@ echo $collection->count(); // Will Output 3.
 
 You can also create the collection statically.
 
-```
-<?php
+```php
 
 use ReallySimple\Collection;
 
