@@ -42,9 +42,43 @@ class CollectionTest extends TestCase
 
         $this->assertInstanceOf(Collection::class, $result);
 
-        $this->assertEquals(3, $result->count());
+        $this->assertSame(3, $result->count());
 
-        $this->assertEquals('Craig', $result->next()['forename']);
+        $this->assertSame('Craig', $result->next()['forename']);
+    }
+
+    public function testCollectionFilterKeys()
+    {
+        $collection = new Collection($this->items);
+
+        $result = $collection->filterKeys(
+            function ($key) {
+                return $key >= 2;
+            }
+        );
+
+        $this->assertInstanceOf(Collection::class, $result);
+
+        $this->assertSame(3, $result->count());
+
+        $this->assertSame('Craig', $result->current()['forename']);
+    }
+
+    public function testCollectionFilterKeysValues()
+    {
+        $collection = new Collection($this->items);
+
+        $result = $collection->filterKeysValues(
+            function ($item, $key) {
+                return $key >= 2 && $item['age'] >= 20;
+            }
+        );
+
+        $this->assertInstanceOf(Collection::class, $result);
+
+        $this->assertSame(2, $result->count());
+
+        $this->assertSame('Gary', $result->current()['forename']);
     }
 
     public function testCollectionMap()
@@ -57,11 +91,40 @@ class CollectionTest extends TestCase
 
         $this->assertInstanceOf(Collection::class, $result);
 
-        $this->assertEquals(5, $result->count());
+        $this->assertSame(5, $result->count());
 
-        $this->assertEquals('Foo Bar', $result->current());
+        $this->assertSame('Foo Bar', $result->current());
 
-        $this->assertEquals('Anne Jones', $result->next());
+        $this->assertSame('Anne Jones', $result->next());
+    }
+
+    public function testCollectionReduce()
+    {
+        $collection = new Collection($this->items);
+
+        $result = $collection->reduce(function ($carry, $item) {
+            $carry[] = [
+                'first-name' => $item['forename'],
+                'last-name' => $item['surname']
+            ];
+
+            return $carry;
+        }, []);
+
+        $this->assertInstanceOf(Collection::class, $result);
+
+        $this->assertSame($result->count(), 5);
+
+        $this->assertTrue(isset($result->current()['first-name']));
+        $this->assertTrue(isset($result->current()['last-name']));
+
+        $this->assertSame($result->current()['first-name'], 'Foo');
+
+        $this->assertFalse(isset($result->current()['forename']));
+        $this->assertFalse(isset($result->current()['surname']));
+
+        $this->assertTrue(isset($result->next()['first-name']));
+        $this->assertTrue(isset($result->next()['last-name']));
     }
 
     public function testCollectionAddItem()
@@ -75,11 +138,11 @@ class CollectionTest extends TestCase
 
         $this->assertInstanceOf(Collection::class, $result);
 
-        $this->assertEquals(5, $result->count());
+        $this->assertSame(5, $result->count());
 
-        $this->assertEquals('Foo Bar', $result->current()['fullname']);
+        $this->assertSame('Foo Bar', $result->current()['fullname']);
 
-        $this->assertEquals('Foo', $result->current()['forename']);
+        $this->assertSame('Foo', $result->current()['forename']);
     }
 
     public function testCollectionRemoveKey()
@@ -95,7 +158,7 @@ class CollectionTest extends TestCase
 
         $this->assertInstanceOf(Collection::class, $result);
 
-        $this->assertEquals(5, $result->count());
+        $this->assertSame(5, $result->count());
 
         $this->assertFalse(isset($result->current()['email']));
 
@@ -106,13 +169,13 @@ class CollectionTest extends TestCase
     {
         $collection = new Collection($this->items);
 
-        $this->assertEquals('Foo', $collection->first()['forename']);
+        $this->assertSame('Foo', $collection->first()['forename']);
 
         $collection->next();
         $collection->next();
 
-        $this->assertEquals('Craig', $collection->current()['forename']);
-        $this->assertEquals('Bar', $collection->first()['surname']);
+        $this->assertSame('Craig', $collection->current()['forename']);
+        $this->assertSame('Bar', $collection->first()['surname']);
     }
 
     public function testCollectionStaticMake()
@@ -121,6 +184,6 @@ class CollectionTest extends TestCase
 
         $this->assertInstanceOf(Collection::class, $collection);
 
-        $this->assertEquals('Foo', $collection->current()['forename']);
+        $this->assertSame('Foo', $collection->current()['forename']);
     }
 }
