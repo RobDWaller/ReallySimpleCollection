@@ -21,6 +21,20 @@ class CollectionTest extends TestCase
         $this->assertInstanceOf(Collection::class, $collection);
     }
 
+    public function testCollectionMake()
+    {
+        $this->assertInstanceOf(Collection::class, Collection::make($this->items));
+    }
+
+    public function testCollectionToArray()
+    {
+        $collection = new Collection($this->items);
+
+        $array = $collection->toArray();
+
+        $this->assertSame($array[1], $this->items[1]);
+    }
+
     public function testCollectionLoop()
     {
         $collection = new Collection($this->items);

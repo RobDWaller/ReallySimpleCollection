@@ -48,7 +48,7 @@ class MapReduce
     public function filterKeys(callable $callback): Collection
     {
         return new Collection(
-         array_filter($this->items, $callback, ARRAY_FILTER_USE_KEY)
+            array_filter($this->items, $callback, ARRAY_FILTER_USE_KEY)
         );
     }
 
@@ -62,7 +62,7 @@ class MapReduce
     public function filterKeysValues(callable $callback): Collection
     {
         return new Collection(
-          array_filter($this->items, $callback, ARRAY_FILTER_USE_BOTH)
+            array_filter($this->items, $callback, ARRAY_FILTER_USE_BOTH)
         );
     }
 
