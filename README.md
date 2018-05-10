@@ -37,43 +37,43 @@ The following methods are currently available for this collection library.
 
 ```php
 // Return the number of items in the collection
-$collection->count();
+$collection->count(): int;
 
-// Return the current item in the collection
+// Return the current item the collection pointer is on
 $collection->current();
 
 // Filter the collection based on the values and return a new collection
-$collection->filter();
+$collection->filter(callable $callback): Collection;
 
 // Filter the collection based on the keys and return a new collection
-$collection->filterKeys();
+$collection->filterKeys(callable $callback): Collection;
 
 // Filter the collection based on the keys and values and return a new collection
-$collection->filterKeysValues();
+$collection->filterKeysValues(callable $callback): Collection;
 
 // Return the first item from the collection
 $collection->first();
 
-// Return the current key the collection is on
+// Return the current key the collection pointer is on
 $collection->key();
 
 // Map the collection and return a new collection
-$collection->map();
+$collection->map(callable $callback): Collection;
 
-// Move the collection key forward by one
+// Move the collection point forward by one and return value
 $collection->next();
 
-// Return the collection key to the start of the collection
+// Return the collection pointer to the start of the collection
 $collection->rewind();
 
 // Reduce the collection and return a new collection
-$collection->reduce();
+$collection->reduce(callable $callback, $initial = null): Collection;
 
 // Return the collection as an array
-$collection->toArray();
+$collection->toArray(): array;
 
 // Check the collection key is valid
-$collection->valid();
+$collection->valid(): bool;
 ```
 
 ## Author
